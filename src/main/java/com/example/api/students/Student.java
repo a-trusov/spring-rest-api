@@ -1,11 +1,20 @@
-package com.example.api;
+package com.example.api.students;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
+@Entity
 public class Student {
 
+    @Id
+    @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private Long id;
+
+
     private String name;
+
     private LocalDate dob;
 
     public Student() {
@@ -38,5 +47,19 @@ public class Student {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+
+    public int getAge() {
+        return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dob=" + dob +
+                '}';
     }
 }

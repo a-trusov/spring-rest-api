@@ -1,7 +1,10 @@
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
   datasource:
-    username: postgres
-    password: postgres
     url: jdbc:postgresql://localhost:5432/students
     driver-class-name:  org.postgresql.Driver
+    username: postgres
+    password: postgres
