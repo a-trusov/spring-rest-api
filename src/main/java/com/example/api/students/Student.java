@@ -12,17 +12,20 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private Long id;
 
-
     private String name;
 
     private LocalDate dob;
 
+    @Column(unique = true)
+    private String email;
+
     public Student() {
     }
 
-    public Student(String name, LocalDate dob) {
+    public Student(String name, LocalDate dob, String email) {
         this.name = name;
         this.dob = dob;
+        this.email = email;
     }
 
     public Long getId() {
@@ -49,9 +52,12 @@ public class Student {
         this.dob = dob;
     }
 
-
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -60,6 +66,7 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", dob=" + dob +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
